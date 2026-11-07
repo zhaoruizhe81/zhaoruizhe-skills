@@ -1,0 +1,154 @@
+{
+  "title": "六实体线条测试 ER 图",
+  "layout": {
+    "mode": "tree",
+    "center": "order",
+    "spacing": { "x": 360, "y": 280 },
+    "postLayout": "arrange"
+  },
+  "entities": [
+    {
+      "id": "customer",
+      "label": "客户",
+      "layout": {
+        "zone": "left",
+        "priority": 85,
+        "order": 1,
+        "near": ["order"],
+        "attributes": { "mode": "radial", "side": "left" }
+      },
+      "attributes": [
+        { "id": "customer_id", "label": "客户编号", "key": true },
+        { "id": "name", "label": "姓名" },
+        { "id": "phone", "label": "电话" }
+      ]
+    },
+    {
+      "id": "order",
+      "label": "订单",
+      "layout": {
+        "zone": "center",
+        "priority": 100,
+        "order": 0,
+        "near": ["customer", "product", "payment", "shipment"],
+        "attributes": { "mode": "compact", "side": "top" }
+      },
+      "attributes": [
+        { "id": "order_id", "label": "订单编号", "key": true },
+        { "id": "created_at", "label": "下单时间" },
+        { "id": "status", "label": "订单状态" }
+      ]
+    },
+    {
+      "id": "product",
+      "label": "商品",
+      "layout": {
+        "zone": "right",
+        "priority": 90,
+        "order": 1,
+        "near": ["order", "supplier"],
+        "attributes": { "mode": "radial", "side": "right" }
+      },
+      "attributes": [
+        { "id": "product_id", "label": "商品编号", "key": true },
+        { "id": "name", "label": "商品名称" },
+        { "id": "price", "label": "价格" }
+      ]
+    },
+    {
+      "id": "payment",
+      "label": "支付",
+      "layout": {
+        "zone": "bottom",
+        "priority": 70,
+        "order": 1,
+        "near": ["order"],
+        "attributes": { "mode": "radial", "side": "bottom" }
+      },
+      "attributes": [
+        { "id": "payment_id", "label": "支付编号", "key": true },
+        { "id": "amount", "label": "金额" },
+        { "id": "method", "label": "方式" }
+      ]
+    },
+    {
+      "id": "shipment",
+      "label": "配送",
+      "layout": {
+        "zone": "top",
+        "priority": 65,
+        "order": 1,
+        "near": ["order"],
+        "attributes": { "mode": "radial", "side": "top" }
+      },
+      "attributes": [
+        { "id": "shipment_id", "label": "配送编号", "key": true },
+        { "id": "address", "label": "地址" },
+        { "id": "carrier", "label": "承运商" }
+      ]
+    },
+    {
+      "id": "supplier",
+      "label": "供应商",
+      "layout": {
+        "zone": "far_right",
+        "priority": 60,
+        "order": 1,
+        "near": ["product"],
+        "attributes": { "mode": "radial", "side": "right" }
+      },
+      "attributes": [
+        { "id": "supplier_id", "label": "供应商编号", "key": true },
+        { "id": "name", "label": "名称" },
+        { "id": "contact", "label": "联系人" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "customer_order",
+      "label": "提交",
+      "layout": { "order": 1 },
+      "participants": [
+        { "entity": "customer", "cardinality": "1", "role": "客户", "side": "right" },
+        { "entity": "order", "cardinality": "N", "role": "订单", "side": "left" }
+      ]
+    },
+    {
+      "id": "order_product",
+      "label": "包含",
+      "layout": { "order": 2 },
+      "participants": [
+        { "entity": "order", "cardinality": "N", "role": "订单", "side": "right" },
+        { "entity": "product", "cardinality": "N", "role": "商品", "side": "left" }
+      ]
+    },
+    {
+      "id": "order_payment",
+      "label": "生成",
+      "layout": { "order": 3 },
+      "participants": [
+        { "entity": "order", "cardinality": "1", "role": "订单", "side": "bottom" },
+        { "entity": "payment", "cardinality": "1", "role": "支付", "side": "top" }
+      ]
+    },
+    {
+      "id": "order_shipment",
+      "label": "安排",
+      "layout": { "order": 4 },
+      "participants": [
+        { "entity": "order", "cardinality": "1", "role": "订单", "side": "top" },
+        { "entity": "shipment", "cardinality": "1", "role": "配送", "side": "bottom" }
+      ]
+    },
+    {
+      "id": "supplier_product",
+      "label": "供货",
+      "layout": { "order": 5 },
+      "participants": [
+        { "entity": "supplier", "cardinality": "1", "role": "供应商", "side": "left" },
+        { "entity": "product", "cardinality": "N", "role": "商品", "side": "right" }
+      ]
+    }
+  ]
+}

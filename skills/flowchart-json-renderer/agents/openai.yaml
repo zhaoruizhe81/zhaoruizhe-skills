@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flowchart JSON Renderer"
+  short_description: "Render JSON flowcharts to SVG and PNG"
+  default_prompt: "Use $flowchart-json-renderer to create a JSON flowchart and export SVG and PNG files."

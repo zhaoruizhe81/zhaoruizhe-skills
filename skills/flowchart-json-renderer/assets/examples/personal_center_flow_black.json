@@ -1,0 +1,41 @@
+{
+  "title": "",
+  "direction": "TB",
+  "theme": "black",
+  "grid_size": 8,
+  "margin_x": 18,
+  "margin_top": 10,
+  "margin_bottom": 16,
+  "node_gap": 24,
+  "lane_clearance": 32,
+  "lane_gap": 24,
+  "side_stub": 16,
+  "port_stub": 8,
+  "node_pad": 6,
+  "label_pad": 4,
+  "node_font_size": 12,
+  "label_font_size": 12,
+  "title_font_size": 16,
+  "nodes": [
+    {"id": "start", "type": "terminal", "text": "开始", "width": 78, "height": 44},
+    {"id": "login", "type": "rect", "text": "用户登录系统", "width": 104, "height": 40},
+    {"id": "menu", "type": "rect", "text": "点击个人中心菜单", "width": 122, "height": 40},
+    {"id": "page", "type": "rect", "text": "进入个人中心页面", "width": 122, "height": 40},
+    {"id": "operate", "type": "rect", "text": "进行功能操作", "width": 122, "height": 40},
+    {"id": "continue", "type": "diamond", "text": "是否继续操作", "width": 118, "height": 70},
+    {"id": "exit", "type": "rect", "text": "退出个人中心", "width": 122, "height": 40},
+    {"id": "home", "type": "rect", "text": "返回首页", "width": 122, "height": 40},
+    {"id": "end", "type": "terminal", "text": "结束", "width": 78, "height": 44}
+  ],
+  "edges": [
+    {"from": "start", "to": "login"},
+    {"from": "login", "to": "menu"},
+    {"from": "menu", "to": "page"},
+    {"from": "page", "to": "operate"},
+    {"from": "operate", "to": "continue"},
+    {"from": "continue", "from_port": "s", "to": "exit", "to_port": "n", "label": "否"},
+    {"from": "continue", "from_port": "e", "to": "operate", "to_port": "e", "label": "是"},
+    {"from": "exit", "to": "home"},
+    {"from": "home", "to": "end"}
+  ]
+}

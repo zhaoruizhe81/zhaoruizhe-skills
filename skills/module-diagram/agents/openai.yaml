@@ -1,0 +1,4 @@
+interface:
+  display_name: "Module Diagram"
+  short_description: "Generate thesis-style module and WBS diagrams"
+  default_prompt: "Use $module-diagram to generate a thesis-style function module diagram from my module tree."

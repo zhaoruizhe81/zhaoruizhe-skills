@@ -1,0 +1,4 @@
+interface:
+  display_name: "ER SVG Generator"
+  short_description: "Render compact Chen ER diagrams with auto attributes."
+  default_prompt: "Use $er-svg-generator to render or debug a compact Chen-style ER diagram with automatic layout and space-aware entity attributes."

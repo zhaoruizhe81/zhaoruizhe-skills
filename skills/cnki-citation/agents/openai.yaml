@@ -1,0 +1,4 @@
+interface:
+  display_name: "知网文献引用"
+  short_description: "检索知网文献并生成 GB/T 7714 等格式引文"
+  default_prompt: "帮我在知网检索「大语言模型 教育」主题的高被引文献,并生成参考文献"

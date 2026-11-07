@@ -1,0 +1,27 @@
+{
+  "title": "资料审核端口示例",
+  "direction": "TB",
+  "nodes": [
+    {"id": "start", "type": "terminal", "text": "开始"},
+    {"id": "submit", "type": "rect", "text": "提交资料\n生成审核单"},
+    {"id": "audit", "type": "diamond", "text": "资料\n是否合格"},
+    {"id": "revise", "type": "rect", "text": "退回修改\n补充缺失项"},
+    {"id": "approve", "type": "rect", "text": "通过初审\n进入办理"},
+    {"id": "fee", "type": "diamond", "text": "费用\n是否缴清"},
+    {"id": "remind", "type": "rect", "text": "发送提醒\n等待缴费"},
+    {"id": "archive", "type": "rect", "text": "归档结果\n通知申请人"},
+    {"id": "end", "type": "terminal", "text": "结束"}
+  ],
+  "edges": [
+    {"from": "start", "to": "submit"},
+    {"from": "submit", "to": "audit"},
+    {"from": "audit", "from_port": "w", "to": "revise", "to_port": "n", "label": "否"},
+    {"from": "revise", "from_port": "e", "to": "audit", "to_port": "w", "label": "补正后复审"},
+    {"from": "audit", "from_port": "e", "to": "approve", "to_port": "n", "label": "是"},
+    {"from": "approve", "to": "fee"},
+    {"from": "fee", "from_port": "w", "to": "remind", "to_port": "n", "label": "否"},
+    {"from": "remind", "from_port": "e", "to": "fee", "to_port": "w", "label": "缴费后确认"},
+    {"from": "fee", "from_port": "e", "to": "archive", "to_port": "n", "label": "是"},
+    {"from": "archive", "to": "end"}
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Windows GUI 自动化"
+  short_description: "本机或远程驱动 Windows 桌面软件：点击、输入、截图闭环"
+  default_prompt: "用 $window-use 在我的 Windows 电脑上自动化操作桌面软件，逐步截图验证"

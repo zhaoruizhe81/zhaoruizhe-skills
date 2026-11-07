@@ -1,0 +1,23 @@
+{
+  "skill_name": "volcengine-tts",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "帮我把这段文字转成语音：今天天气真好，适合出去散步。阳光明媚，微风拂面，让人心情愉悦。请保存到 ~/Desktop/tts-basic-test.mp3",
+      "expected_output": "生成一个 mp3 音频文件，保存在 ~/Desktop/tts-basic-test.mp3，文件大小 > 0",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "把这个 Markdown 文件转成语音，要求过滤掉 markdown 语法符号，用温暖的男声朗读，输出 ogg 格式",
+      "expected_output": "使用 --enable-markdown-filter，指定男声音色，输出 ogg_opus 格式，文件生成成功",
+      "files": ["test_content.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "用欢快的语气、1.5倍语速朗读这段话：大家好，欢迎收听今天的节目！我们有很多精彩的内容要和大家分享。输出保存为 fast.mp3",
+      "expected_output": "指定 speed=50（1.5倍），使用情感参数，输出 fast.mp3 文件，文件大小 > 0",
+      "files": []
+    }
+  ]
+}

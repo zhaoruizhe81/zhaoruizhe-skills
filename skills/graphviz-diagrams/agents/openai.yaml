@@ -1,0 +1,4 @@
+interface:
+  display_name: "Graphviz Diagrams"
+  short_description: "Create and render DOT diagrams with Graphviz"
+  default_prompt: "Use $graphviz-diagrams to create and render a clear Graphviz DOT diagram."

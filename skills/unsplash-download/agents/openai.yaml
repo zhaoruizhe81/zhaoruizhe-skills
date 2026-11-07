@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unsplash Download"
+  short_description: "Search and download Unsplash photos locally."
+  default_prompt: "Use $unsplash-download to search Unsplash for 5 campus photos and save them to /absolute/path/output."

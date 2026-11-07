@@ -1,0 +1,53 @@
+graph ChenER_Radial_Student_CN {
+  graph [
+    layout=neato,
+    bgcolor="white",
+    outputorder=edgesfirst,
+    overlap=false,
+    splines=line,
+    pad=0.25,
+    fontname="PingFang SC"
+  ];
+
+  node [
+    shape=ellipse,
+    fontname="PingFang SC",
+    color=black,
+    fillcolor=white,
+    fontcolor=black,
+    style=filled,
+    margin="0.10,0.05"
+  ];
+  edge [
+    color=black,
+    penwidth=1.1
+  ];
+
+  Student [
+    label="学生",
+    style="filled,bold",
+    fontsize=16,
+    width=1.25,
+    height=0.65,
+    pos="0,0!",
+    pin=true
+  ];
+
+  StudentID [label=<<U>学号</U>>, pos="0,2.55!", pin=true];
+  Name [label="姓名", pos="1.80,1.80!", pin=true];
+  Gender [label="性别", pos="2.55,0!", pin=true];
+  Phone [label="联系方式", peripheries=2, pos="1.80,-1.80!", pin=true];
+  Email [label="邮箱", pos="0,-2.55!", pin=true];
+  Age [label="年龄", style="filled,dashed", pos="-1.80,-1.80!", pin=true];
+  EnrollmentDate [label="入学日期", pos="-2.55,0!", pin=true];
+  Major [label="专业", pos="-1.80,1.80!", pin=true];
+
+  Student -- StudentID;
+  Student -- Name;
+  Student -- Gender;
+  Student -- Phone;
+  Student -- Email;
+  Student -- Age;
+  Student -- EnrollmentDate;
+  Student -- Major;
+}

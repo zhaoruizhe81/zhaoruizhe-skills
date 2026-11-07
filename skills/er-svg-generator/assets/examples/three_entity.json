@@ -1,0 +1,79 @@
+{
+  "title": "三实体线条测试 ER 图",
+  "layout": {
+    "mode": "guided",
+    "center": "borrow_record",
+    "spacing": { "x": 380, "y": 260 },
+    "postLayout": "arrange"
+  },
+  "entities": [
+    {
+      "id": "student",
+      "label": "学生",
+      "layout": {
+        "zone": "left",
+        "priority": 80,
+        "order": 1,
+        "near": ["borrow_record"],
+        "attributes": { "mode": "radial", "side": "left" }
+      },
+      "attributes": [
+        { "id": "student_id", "label": "学号", "key": true },
+        { "id": "name", "label": "姓名" },
+        { "id": "phone", "label": "联系方式" }
+      ]
+    },
+    {
+      "id": "borrow_record",
+      "label": "借阅记录",
+      "layout": {
+        "zone": "center",
+        "priority": 100,
+        "order": 0,
+        "near": ["student", "book"],
+        "attributes": { "mode": "compact", "side": "top" }
+      },
+      "attributes": [
+        { "id": "record_id", "label": "记录编号", "key": true },
+        { "id": "borrow_date", "label": "借阅日期" },
+        { "id": "due_date", "label": "应还日期" }
+      ]
+    },
+    {
+      "id": "book",
+      "label": "图书",
+      "layout": {
+        "zone": "right",
+        "priority": 80,
+        "order": 1,
+        "near": ["borrow_record"],
+        "attributes": { "mode": "radial", "side": "right" }
+      },
+      "attributes": [
+        { "id": "book_id", "label": "图书编号", "key": true },
+        { "id": "title", "label": "书名" },
+        { "id": "isbn", "label": "ISBN" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "student_borrow_record",
+      "label": "产生",
+      "layout": { "order": 1 },
+      "participants": [
+        { "entity": "student", "cardinality": "1", "role": "借阅人", "side": "right" },
+        { "entity": "borrow_record", "cardinality": "N", "role": "记录", "side": "left" }
+      ]
+    },
+    {
+      "id": "record_book",
+      "label": "对应",
+      "layout": { "order": 2 },
+      "participants": [
+        { "entity": "borrow_record", "cardinality": "N", "role": "记录", "side": "right" },
+        { "entity": "book", "cardinality": "1", "role": "图书", "side": "left" }
+      ]
+    }
+  ]
+}

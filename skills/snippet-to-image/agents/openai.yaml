@@ -1,0 +1,4 @@
+interface:
+  display_name: "Snippet to Image"
+  short_description: "Render code, plain text, and ANSI terminal output into PNG images"
+  default_prompt: "Use $snippet-to-image to choose the right renderer and turn this code, text, or terminal output into a PNG image."

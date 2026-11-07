@@ -1,0 +1,17 @@
+{
+  "direction": "TB",
+  "nodes": [
+    {"id": "start", "type": "terminal", "text": "开始"},
+    {"id": "login", "type": "rect", "text": "登录"},
+    {"id": "check", "type": "diamond", "text": "是否正确输入\n用户名和密码"},
+    {"id": "manage", "type": "rect", "text": "进入系统管理"},
+    {"id": "end", "type": "terminal", "text": "结束"}
+  ],
+  "edges": [
+    {"from": "start", "to": "login"},
+    {"from": "login", "to": "check"},
+    {"from": "check", "to": "manage", "label": "是"},
+    {"from": "check", "to": "login", "label": "否"},
+    {"from": "manage", "to": "end"}
+  ]
+}

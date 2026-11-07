@@ -1,0 +1,4 @@
+interface:
+  display_name: "SpringBoot CRUD Codegen"
+  short_description: "Run black-box Spring Boot CRUD generation"
+  default_prompt: "Use $springboot2-crud-codegen to create a JSON config, run the black-box generator, and inspect the generated Spring Boot CRUD project."

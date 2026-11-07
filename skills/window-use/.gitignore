@@ -1,0 +1,11 @@
+# 证据产物与缓存永不入库（2026-11-05 的 172MB 学费）
+shots/
+shots-archive/
+remote/shots/
+__pycache__/
+*.pyc
+.DS_Store
+*.tar.gz
+next_cmd*.txt
+gui.log*
+*.log

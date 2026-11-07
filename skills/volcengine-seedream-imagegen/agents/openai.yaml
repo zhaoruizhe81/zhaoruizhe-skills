@@ -1,0 +1,4 @@
+interface:
+  display_name: "Volc Seedream"
+  short_description: "Generate Seedream images from prompts locally."
+  default_prompt: "Use $volcengine-seedream-imagegen to create a 16:9 cinematic campus poster and save it to /absolute/path/output."

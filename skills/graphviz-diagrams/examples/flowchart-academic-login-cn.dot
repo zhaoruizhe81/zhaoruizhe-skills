@@ -1,0 +1,48 @@
+digraph AcademicLoginFlowchart {
+  // 1. Global chart settings
+  graph [rankdir=TB, dpi=300];
+
+  // 2. Global node and edge styles
+  // margin="0.2,0.1" adds horizontal and vertical padding to avoid cramped text.
+  node [
+    fontname="SimSun",
+    shape=box,
+    style=solid,
+    color=black,
+    fontcolor=black,
+    margin="0.2,0.1"
+  ];
+  edge [
+    fontname="SimSun",
+    color=black,
+    fontcolor=black,
+    fontsize=10
+  ];
+
+  // 3. Nodes and standard flowchart shapes
+  Start [shape=ellipse, label="开始"];
+  Input [shape=parallelogram, label="输入账号\n和密码"];
+  CheckFormat [shape=diamond, label="格式是否\n有效?"];
+  FormatError [shape=box, label="提示输入\n格式错误"];
+  VerifyUser [shape=box, label="系统查询\n并验证凭据"];
+  CheckAuth [shape=diamond, label="验证是否\n通过?"];
+  AuthError [shape=box, label="提示账号或\n密码错误"];
+  CreateSession [shape=box, label="创建会话\n并授权"];
+  End [shape=ellipse, label="结束"];
+
+  // 4. Logic flow
+  Start -> Input;
+  Input -> CheckFormat;
+
+  CheckFormat -> VerifyUser [label=" 是"];
+  CheckFormat -> FormatError [label=" 否"];
+  FormatError -> Input [style=dashed];
+
+  VerifyUser -> CheckAuth;
+
+  CheckAuth -> CreateSession [label=" 是"];
+  CheckAuth -> AuthError [label=" 否"];
+  AuthError -> Input [style=dashed];
+
+  CreateSession -> End;
+}

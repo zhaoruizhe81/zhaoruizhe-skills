@@ -1,0 +1,99 @@
+{
+  "direction": "TB",
+  "theme": "white",
+  "grid_size": 10,
+  "margin_x": 46,
+  "margin_top": 36,
+  "margin_bottom": 42,
+  "node_gap": 56,
+  "node_pad": 18,
+  "label_pad": 4,
+  "port_stub": 20,
+  "side_stub": 26,
+  "node_font_size": 24,
+  "label_font_size": 24,
+  "node_stroke_width": 1.35,
+  "edge_stroke_width": 1.35,
+  "arrow_size": 6.5,
+  "nodes": [
+    {
+      "id": "detect",
+      "type": "diamond",
+      "text": "是否为\n中间件检测?",
+      "width": 460,
+      "height": 150,
+      "x": 520,
+      "y": 110
+    },
+    {
+      "id": "register",
+      "type": "rect",
+      "text": "注册目标\n创建扫描任务",
+      "width": 340,
+      "height": 120,
+      "x": 220,
+      "y": 330
+    },
+    {
+      "id": "poc",
+      "type": "rect",
+      "text": "写入记录\n执行POC脚本",
+      "width": 340,
+      "height": 120,
+      "x": 820,
+      "y": 330
+    },
+    {
+      "id": "result",
+      "type": "rect",
+      "text": "整理结果\n写入或读取数据",
+      "width": 420,
+      "height": 120,
+      "x": 520,
+      "y": 560
+    },
+    {
+      "id": "finish",
+      "type": "terminal",
+      "text": "完成",
+      "width": 180,
+      "height": 66,
+      "x": 520,
+      "y": 735
+    }
+  ],
+  "edges": [
+    {
+      "from": "detect",
+      "to": "register",
+      "label": "否",
+      "from_port": "s",
+      "to_port": "n"
+    },
+    {
+      "from": "detect",
+      "to": "poc",
+      "label": "是",
+      "from_port": "s",
+      "to_port": "n"
+    },
+    {
+      "from": "register",
+      "to": "result",
+      "from_port": "s",
+      "to_port": "n"
+    },
+    {
+      "from": "poc",
+      "to": "result",
+      "from_port": "s",
+      "to_port": "n"
+    },
+    {
+      "from": "result",
+      "to": "finish",
+      "from_port": "s",
+      "to_port": "n"
+    }
+  ]
+}

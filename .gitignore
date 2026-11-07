@@ -1,0 +1,13 @@
+# 机密与本地配置，绝不入库
+.env
+*.env
+!*.env.example
+!.env.example
+
+# 缓存与系统垃圾
+__pycache__/
+*.pyc
+.DS_Store
+
+# 不应带入的仓库元数据
+.git/

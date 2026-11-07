@@ -1,0 +1,18 @@
+{
+  "title": "棱形端口测试",
+  "direction": "TB",
+  "nodes": [
+    {"id": "start", "type": "terminal", "text": "开始"},
+    {"id": "check", "type": "diamond", "text": "校验\n是否通过"},
+    {"id": "left", "type": "rect", "text": "左侧处理"},
+    {"id": "right", "type": "rect", "text": "右侧处理"},
+    {"id": "end", "type": "terminal", "text": "结束"}
+  ],
+  "edges": [
+    {"from": "start", "to": "check"},
+    {"from": "check", "from_port": "w", "to": "left", "to_port": "n", "label": "否"},
+    {"from": "left", "from_port": "e", "to": "check", "to_port": "w", "label": "重新校验"},
+    {"from": "check", "from_port": "e", "to": "right", "to_port": "n", "label": "是"},
+    {"from": "right", "to": "end"}
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "skill_name": "zip-mojibake",
+  "evals": [
+    {
+      "id": 1,
+      "name": "diagnose-mojibake",
+      "prompt": "我收到同学发来的一个 zip 压缩包,放在当前目录,叫 09a1bed06db8c470fa8f3fb61808bcc0_6998922747265306.zip。我用 macOS 双击解压后,文件名变成了 1_½ªÉºÉº_code_and_report.zip 这种乱码。这到底是什么文件?为什么会乱码?里面应该是什么内容?",
+      "expected_output": "诊断报告:识别出双重编码根因,正确还原出 1_姜珊珊_code_and_report.zip / 2_石东君_code_and_report.zip / 3_李曜辰_code_and_report.zip 三个真名,解释 Windows 国产压缩工具的 EFS+latin-1(GBK) bug。不需要解压。",
+      "files": ["09a1bed06db8c470fa8f3fb61808bcc0_6998922747265306.zip"],
+      "assertions": [
+        {
+          "name": "recovered_filenames_contain_chinese",
+          "text": "输出中至少提到一个正确的中文名(姜珊珊 / 石东君 / 李曜辰)"
+        },
+        {
+          "name": "explains_double_encoding_root_cause",
+          "text": "解释中提及 GBK、UTF-8 和 EFS 标志位三者关系,点明 Windows 工具的双重编码 bug"
+        },
+        {
+          "name": "no_extraction_performed",
+          "text": "不应该实际执行解压操作(用户只是问诊断)"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "fix-and-extract",
+      "prompt": "帮我把当前目录下这个 09a1bed06db8c470fa8f3fb61808bcc0_6998922747265306.zip 解压出来,文件名要恢复正常中文。里面应该还有三个内层 zip,也都要展开。",
+      "expected_output": "成功执行递归修复解压,产出目录中所有中文名正常显示(姜珊珊/石东君/李曜辰),内层 zip 自动展开,docx/pdf/jpg/cpp 等文件齐全。",
+      "files": ["09a1bed06db8c470fa8f3fb61808bcc0_6998922747265306.zip"],
+      "assertions": [
+        {
+          "name": "extracts_to_chinese_names",
+          "text": "解压产物中存在包含中文名的文件(如 姜珊珊-compile.jpg、石东君-test1.jpg、李曜辰-test2.jpg)"
+        },
+        {
+          "name": "no_latin1_mojibake_in_output",
+          "text": "产物文件名中不含 ½ Ê À Ã Â É Î 这种 Latin-1 mojibake 字符"
+        },
+        {
+          "name": "nested_zips_expanded",
+          "text": "内层 zip 已展开(Final_Project_src/ 目录、.docx 文件、.jpg 截图等都存在)"
+        },
+        {
+          "name": "does_not_destroy_source",
+          "text": "原 zip 文件未被删除或覆盖"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "repack-for-windows",
+      "prompt": "当前目录有 3 个文件夹(1_姜珊珊_code_and_report / 2_石东君_code_and_report / 3_李曜辰_code_and_report),里面有 .docx、.pdf、.cpp、.jpg 等带中文文件名的资料。我要打包发给 Windows 同事,确保他双击用资源管理器解压不会乱码。帮我打成一个 zip。",
+      "expected_output": "产出一个新 zip,文件名按合法 UTF-8 编码、EFS 标志位正确设置,Python zipfile.namelist() 能正确读出中文,Windows 10+ 资源管理器 / 7-Zip / WinRAR 都能正确识别。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "produces_utf8_zip",
+          "text": "产出一个新的 zip 文件"
+        },
+        {
+          "name": "efs_flag_set_for_chinese_entries",
+          "text": "新 zip 中所有含中文的文件名条目 EFS(0x800) 标志位 = 1"
+        },
+        {
+          "name": "filenames_are_valid_utf8",
+          "text": "新 zip 中央目录中所有文件名字节可被 strict UTF-8 解码"
+        },
+        {
+          "name": "no_double_encoding",
+          "text": "新 zip 中文件名不会出现 latin-1→gbk 双重编码可解的特征"
+        },
+        {
+          "name": "skips_junk_files",
+          "text": "打包内容中不含 .DS_Store、Thumbs.db、._* 文件"
+        }
+      ]
+    }
+  ]
+}

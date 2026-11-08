@@ -72,6 +72,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [graphviz-diagrams](skills/graphviz-diagrams/) | 创建、校验、渲染 Graphviz DOT/GV 图 |
 | [jupyter-notebook](skills/jupyter-notebook/) | 创建/编辑 Jupyter 笔记本（.ipynb） |
 | [kaggle](skills/kaggle/) | Kaggle 竞赛、数据集与 notebook 工作流 |
+| [magpie-browser](skills/magpie-browser/) | 操作用户本人的真实 Chrome（共享登录态与标签页），需浏览器侧 Magpie 扩展 |
 | [module-diagram](skills/module-diagram/) | 论文风格功能模块图 / WBS 树状图 |
 | [ppt-master](skills/ppt-master/) | AI 驱动的可编辑 PPTX 生成工作流（含模板库，~120M） |
 | [qq-mail](skills/qq-mail/) | QQ 邮箱发信（支持中文附件名）/收发件查询 |

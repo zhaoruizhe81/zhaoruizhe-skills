@@ -1,0 +1,4 @@
+interface:
+  display_name: "红队渗透编排"
+  short_description: "红队八段渗透链路编排、隧道与突破选型、成果验收判据库"
+  default_prompt: "Use $redteam-ops to 从目标域名开始铺资产面，按阶段推进到内网横向。"

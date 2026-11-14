@@ -76,6 +76,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [module-diagram](skills/module-diagram/) | 论文风格功能模块图 / WBS 树状图 |
 | [ppt-master](skills/ppt-master/) | AI 驱动的可编辑 PPTX 生成工作流（含模板库，~120M） |
 | [qq-mail](skills/qq-mail/) | QQ 邮箱发信（支持中文附件名）/收发件查询 |
+| [redteam-ops](skills/redteam-ops/) | 红队渗透八段链路编排、隧道与突破选型、成果验收判据（技能正文源自 dsh-purge v1.1.40，MIT） |
 | [skill-creator](skills/skill-creator/) | 创建高质量 skill 的指南与脚手架 |
 | [skill-installer](skills/skill-installer/) | 从 GitHub 仓库安装 skill（含私有仓库支持） |
 | [snippet-to-image](skills/snippet-to-image/) | 代码片段/终端输出渲染为 PNG 图片 |

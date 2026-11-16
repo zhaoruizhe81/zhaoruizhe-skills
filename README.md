@@ -70,6 +70,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [er-svg-generator](skills/er-svg-generator/) | 陈氏 ER 图的生成、渲染与布局优化 |
 | [flowchart-json-renderer](skills/flowchart-json-renderer/) | 从 JSON 生成黑白流程图（内置 Python 渲染器） |
 | [graphviz-diagrams](skills/graphviz-diagrams/) | 创建、校验、渲染 Graphviz DOT/GV 图 |
+| [irasutoya](skills/irasutoya/) | いらすとや 免费插画检索与批量下载（逆向 Blogger JSON feed，无依赖） |
 | [jupyter-notebook](skills/jupyter-notebook/) | 创建/编辑 Jupyter 笔记本（.ipynb） |
 | [kaggle](skills/kaggle/) | Kaggle 竞赛、数据集与 notebook 工作流 |
 | [magpie-browser](skills/magpie-browser/) | 操作用户本人的真实 Chrome（共享登录态与标签页），需浏览器侧 Magpie 扩展 |

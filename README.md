@@ -86,6 +86,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [unsplash-download](skills/unsplash-download/) | 搜索并下载 Unsplash 图片 |
 | [volcengine-seedream-imagegen](skills/volcengine-seedream-imagegen/) | 火山引擎 Seedream 文生图（Ark API） |
 | [volcengine-tts](skills/volcengine-tts/) | 火山引擎豆包语音合成（Seed TTS） |
+| [wikimedia-commons](skills/wikimedia-commons/) | 搜索并下载 Wikimedia Commons 自由版权图片（附作者/许可证/来源清单） |
 | [window-use](skills/window-use/) | 桌面 GUI 自动化工具与知识库 |
 | [writing-skills](skills/writing-skills/) | 如何写好/验证 skill 的方法论 |
 | [xmind-md-to-mindmap](skills/xmind-md-to-mindmap/) | 用 XMind 官网转换器+官方渲染引擎把 Markdown 转成思维导图 PNG（命令行，免登录） |

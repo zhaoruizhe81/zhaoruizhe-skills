@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wikimedia Commons 图片下载"
+  short_description: "搜索并下载 Wikimedia Commons 自由版权图片，附署名清单"
+  default_prompt: "Use $wikimedia-commons to search and download free images from Wikimedia Commons with attribution."

@@ -88,6 +88,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [volcengine-tts](skills/volcengine-tts/) | 火山引擎豆包语音合成（Seed TTS） |
 | [window-use](skills/window-use/) | 桌面 GUI 自动化工具与知识库 |
 | [writing-skills](skills/writing-skills/) | 如何写好/验证 skill 的方法论 |
+| [xmind-md-to-mindmap](skills/xmind-md-to-mindmap/) | 用 XMind 官网转换器+官方渲染引擎把 Markdown 转成思维导图 PNG（命令行，免登录） |
 | [zip-mojibake](skills/zip-mojibake/) | 诊断与修复中文 ZIP 文件名乱码 |
 
 > 注：`ppt-master`、`volcengine-*`、`skill-creator`、`zip-mojibake` 等在本地是通过符号链接安装的，本仓库存的是真实文件拷贝；含密钥的 `.env` 已全部剔除，使用前需按各自 `.env.example` / SKILL.md 说明自行配置。

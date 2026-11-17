@@ -1,0 +1,4 @@
+interface:
+  display_name: "XMind Markdown 转思维导图"
+  short_description: "用官网渲染引擎把 Markdown 转成思维导图 PNG（命令行）"
+  default_prompt: "Use $xmind-md-to-mindmap to convert this Markdown into a mind map PNG."

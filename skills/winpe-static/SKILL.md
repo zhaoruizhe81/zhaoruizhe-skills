@@ -20,9 +20,8 @@ keywords: PE, static analysis, 静态逆向, 静态分析, pefile, radare2, rabi
 
 ## 0. 执行环境
 
-- **默认所有命令在远端 `macmini` 上执行**（通过已配置的 ssh-skill，别名为 `macmini`）：
-  `python3 <ssh-skill根>/scripts/ssh_skill.py exec macmini '<命令>'`
-- 用户明确说"在本机跑"时才用本地 Bash。
+- 本技能安装在**执行分析的机器上（Mac mini）**，所有命令**直接本地 Bash 执行**——无远程中转。
+- 仅当用户主动要求时，才通过 ssh-skill 把命令转发到别的机器（如实体机 `windowpc`）。
 - **开工前先探测工具**（一条命令合并探测，read-only）：
 
 ```bash

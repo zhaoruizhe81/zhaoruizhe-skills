@@ -86,6 +86,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [springboot2-crud-codegen](skills/springboot2-crud-codegen/) | SpringBoot2 CRUD 代码生成器（黑盒 CLI） |
 | [ssh-skill](skills/ssh-skill/) | SSH / SCP / SFTP 远程服务器操作 |
 | [unsplash-download](skills/unsplash-download/) | 搜索并下载 Unsplash 图片 |
+| [usecase-diagram](skills/usecase-diagram/) | UML 用例图渲染：JSON → SVG/高清 PNG（内置渲染器，支持图标/系统边界/include-extend） |
 | [volcengine-seedream-imagegen](skills/volcengine-seedream-imagegen/) | 火山引擎 Seedream 文生图（Ark API） |
 | [volcengine-tts](skills/volcengine-tts/) | 火山引擎豆包语音合成（Seed TTS） |
 | [wikimedia-commons](skills/wikimedia-commons/) | 搜索并下载 Wikimedia Commons 自由版权图片（附作者/许可证/来源清单） |

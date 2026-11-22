@@ -1,0 +1,44 @@
+{
+  "title": "学生课程简化 ER 图 自动布局版",
+  "entities": [
+    { "id": "award", "label": "奖惩", "attributes": [] },
+    { "id": "student", "label": "学生", "attributes": [] },
+    { "id": "course", "label": "课程", "attributes": [] },
+    { "id": "class", "label": "班级", "attributes": [] },
+    { "id": "department", "label": "院系", "attributes": [] }
+  ],
+  "relationships": [
+    {
+      "id": "award_student",
+      "label": "获得",
+      "participants": [
+        { "entity": "award", "cardinality": "N" },
+        { "entity": "student", "cardinality": "1" }
+      ]
+    },
+    {
+      "id": "student_course",
+      "label": "选修",
+      "participants": [
+        { "entity": "student", "cardinality": "N" },
+        { "entity": "course", "cardinality": "M" }
+      ]
+    },
+    {
+      "id": "student_class",
+      "label": "属于",
+      "participants": [
+        { "entity": "student", "cardinality": "1" },
+        { "entity": "class", "cardinality": "N" }
+      ]
+    },
+    {
+      "id": "class_department",
+      "label": "属于",
+      "participants": [
+        { "entity": "class", "cardinality": "N" },
+        { "entity": "department", "cardinality": "1" }
+      ]
+    }
+  ]
+}

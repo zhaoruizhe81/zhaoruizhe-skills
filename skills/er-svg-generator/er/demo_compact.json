@@ -1,0 +1,110 @@
+{
+  "title": "学生选课系统 ER 图",
+  "layout": {
+    "targetAspect": 1.6
+  },
+  "entities": [
+    {
+      "id": "student",
+      "label": "学生",
+      "attributes": [
+        {"id": "student_id", "label": "学号", "key": true},
+        {"id": "name", "label": "姓名"},
+        {"id": "phone", "label": "手机号"},
+        {"id": "grade", "label": "年级"}
+      ]
+    },
+    {
+      "id": "course",
+      "label": "课程",
+      "attributes": [
+        {"id": "course_id", "label": "课程号", "key": true},
+        {"id": "name", "label": "课程名"},
+        {"id": "credit", "label": "学分"}
+      ]
+    },
+    {
+      "id": "teacher",
+      "label": "教师",
+      "attributes": [
+        {"id": "teacher_id", "label": "工号", "key": true},
+        {"id": "name", "label": "姓名"},
+        {"id": "title", "label": "职称"}
+      ]
+    },
+    {
+      "id": "department",
+      "label": "学院",
+      "attributes": [
+        {"id": "department_id", "label": "学院号", "key": true},
+        {"id": "name", "label": "学院名"}
+      ]
+    },
+    {
+      "id": "class",
+      "label": "班级",
+      "attributes": [
+        {"id": "class_id", "label": "班级号", "key": true},
+        {"id": "name", "label": "班级名"}
+      ]
+    },
+    {
+      "id": "room",
+      "label": "教室",
+      "attributes": [
+        {"id": "room_id", "label": "教室号", "key": true},
+        {"id": "capacity", "label": "容量"}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "enroll",
+      "label": "选课",
+      "participants": [
+        {"entity": "student", "cardinality": "N"},
+        {"entity": "course", "cardinality": "M"}
+      ]
+    },
+    {
+      "id": "teach",
+      "label": "授课",
+      "participants": [
+        {"entity": "teacher", "cardinality": "1"},
+        {"entity": "course", "cardinality": "N"}
+      ]
+    },
+    {
+      "id": "belongs",
+      "label": "隶属",
+      "participants": [
+        {"entity": "teacher", "cardinality": "N"},
+        {"entity": "department", "cardinality": "1"}
+      ]
+    },
+    {
+      "id": "major",
+      "label": "开设",
+      "participants": [
+        {"entity": "department", "cardinality": "1"},
+        {"entity": "course", "cardinality": "N"}
+      ]
+    },
+    {
+      "id": "member",
+      "label": "组成",
+      "participants": [
+        {"entity": "student", "cardinality": "N"},
+        {"entity": "class", "cardinality": "1"}
+      ]
+    },
+    {
+      "id": "schedule",
+      "label": "安排",
+      "participants": [
+        {"entity": "course", "cardinality": "N"},
+        {"entity": "room", "cardinality": "1"}
+      ]
+    }
+  ]
+}

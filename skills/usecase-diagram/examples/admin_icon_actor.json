@@ -1,0 +1,20 @@
+{
+  "title": "自定义管理员图标用例图",
+  "actors": [
+    {"id": "admin", "label": "系统管理员", "icon": "admin_icon.png"}
+  ],
+  "usecases": [
+    {"id": "login", "label": "登录"},
+    {"id": "room", "label": "阅览室管理"},
+    {"id": "settings", "label": "个人设置"},
+    {"id": "room_ops", "label": "新增、删除、修改和查询阅览室", "width": 250},
+    {"id": "password", "label": "修改密码", "width": 150}
+  ],
+  "edges": [
+    {"source": "admin", "target": "login", "arrow": "open"},
+    {"source": "admin", "target": "room", "arrow": "open"},
+    {"source": "admin", "target": "settings", "arrow": "open"},
+    {"source": "room", "target": "room_ops", "type": "include", "label": "<<包含>>"},
+    {"source": "settings", "target": "password", "type": "include", "label": "<<包含>>"}
+  ]
+}

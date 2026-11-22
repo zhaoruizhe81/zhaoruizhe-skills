@@ -1,0 +1,23 @@
+{
+  "title": "System overview",
+  "actors": [
+    {"id": "user", "label": "User"},
+    {"id": "admin", "label": "Admin"}
+  ],
+  "boundaries": [
+    {"id": "system", "label": "Maintenance System"}
+  ],
+  "usecases": [
+    {"id": "browse", "label": "Browse notices", "boundary": "system"},
+    {"id": "submit", "label": "Submit request", "boundary": "system"},
+    {"id": "review", "label": "Review request", "boundary": "system"},
+    {"id": "manage", "label": "Manage users", "boundary": "system"}
+  ],
+  "edges": [
+    {"source": "user", "target": "browse"},
+    {"source": "user", "target": "submit"},
+    {"source": "admin", "target": "review"},
+    {"source": "admin", "target": "manage"},
+    {"source": "submit", "target": "browse", "type": "extend"}
+  ]
+}

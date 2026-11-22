@@ -1,15 +1,18 @@
 ---
 name: er-svg-generator
-description: Guide Chen-style ER diagram generation, rendering, debugging, and layout optimization from a project-local renderer. Use when Codex needs to create, render, debug, or validate ER 图 / 实体关系图 / Chen ER diagrams, requiring entity attributes to be included and rendered, especially for compact automatic layout, stale manual coordinate or attribute-side cleanup, space-aware attribute placement, diamond port alignment, relationship routing, SVG/PNG export, or hard layout metrics. This skill intentionally does not bundle renderer source code; use the active project directory as the source of truth.
+description: Guide Chen-style ER diagram generation, rendering, debugging, and layout optimization. Use when Codex needs to create, render, debug, or validate ER 图 / 实体关系图 / Chen ER diagrams, requiring entity attributes to be included and rendered, especially for compact automatic layout, stale manual coordinate or attribute-side cleanup, space-aware attribute placement, diamond port alignment, relationship routing, SVG/PNG export, or hard layout metrics. The skill ships a complete, dependency-free renderer as the bundled `er/` package; a live renderer project directory, if present, remains the development source of truth.
 ---
 
 # ER SVG Generator
 
 ## Purpose
 
-Use this skill as workflow guidance for Chen-style ER diagrams. Do not maintain a second copy of renderer code inside the skill. Treat the active project directory as the source of truth for algorithms, routing, PNG export, and tests.
+Use this skill to generate, render, debug, and validate Chen-style ER diagrams end-to-end. The complete renderer ships with the skill as the `er/` package — pure Python standard library, no third-party dependencies (`model`, `parser`, `layout`, `attributes`, `ports`, `port_solver`, `router`, `post_layout`, `render_svg`, `export`, `png_export`, `stats`, `score`, `geometry`, `topology`, `cli`, plus a standalone `web_editor`).
 
-If the current task is in `/Users/zhaoruizhe/Desktop/project/P/ER图/er` or a similar project containing `model.py`, `layout.py`, `router.py`, `ports.py`, `stats.py`, and `cli.py`, edit and run that project code directly.
+Renderer priority:
+
+1. If the current task sits inside a live renderer project (e.g. `/Users/zhaoruizhe/Desktop/project/P/ER图/er`, containing the same modules), edit and run that project directly — it is the development source of truth.
+2. Otherwise use the bundled `er/` package from this skill directory (command below). It is self-contained and needs no installation.
 
 ## Quick Workflow
 
@@ -17,13 +20,14 @@ If the current task is in `/Users/zhaoruizhe/Desktop/project/P/ER图/er` or a si
 2. Prepare or update an ER JSON input. For schema details, read `references/json-format.md` only when needed.
 3. Before rendering, verify every entity has a non-empty `attributes` array and that attributes are not hidden. If attributes are missing, extract them from DDL/source material, infer concise core attributes when safe, or ask the user; do not produce a final ER diagram with attribute-less entities.
 4. Before final rendering, prefer automatic layout. Remove or ignore `layout.positions.entities`, `layout.positions.relationships`, per-entity or per-relationship `layout.x`/`layout.y`, and stale `layout.attributes.side` hints unless the user explicitly asks to preserve manual placement. Treat coordinates and attribute sides from imported/exported JSON as draft hints; stale fixed layout data commonly makes the diagram sparse or places attributes on cramped sides.
-5. Render from the project-local package. In this project, run from the parent directory:
+5. Render with the bundled package: `cd` to this skill's directory (the one holding SKILL.md) and run:
 
 ```bash
+cd <本技能目录>
 python3 - <<'PY'
 from er.cli import main
 raise SystemExit(main([
-    "er/demo_compact.json",
+    "er/demo_compact.json",      # 或你保存的 JSON 路径
     "-o", "er/output.svg",
     "--png-output", "er/output.png",
     "--auto-layout-clean",
@@ -31,6 +35,8 @@ raise SystemExit(main([
 ]))
 PY
 ```
+
+PNG export requires `rsvg-convert`（`brew install librsvg`）；没有它就去掉 `--png-output`，只交付 SVG。装机自检：渲染 `er/demo_compact.json`，预期 stats 显示 0 crossings / 0 overlaps，且 SVG、PNG 两个文件都生成。
 
 6. Open or view the PNG directly after rendering. Prefer PNG when the user says it is easier to inspect.
 7. Iterate on the algorithm only after checking hard metrics and the actual image.
@@ -68,7 +74,7 @@ When the user says relationship lines do not connect to the diamond correctly:
 
 ## Input Handling
 
-- If the user provides JSON, save it near the working project and run the project renderer.
+- If the user provides JSON, save it next to the renderer you will run (bundled mode: this skill's `er/` directory; project mode: the active project).
 - If provided JSON contains fixed coordinates or old `layout.attributes.side` hints, default to `--auto-layout-clean` for final PNG/SVG output. Preserve manual coordinates and attribute sides only when the user asks to keep the current structure, exact positions, or a hand-tuned layout.
 - If the user provides SQL DDL or a natural-language schema, convert it into the JSON format in `references/json-format.md`.
 - Keep entity and relationship ids in `snake_case`; labels can be Chinese or English.
@@ -95,4 +101,8 @@ When diagnosing excessive whitespace or cramped attributes, compare the fixed-hi
 
 ## Skill Storage Rule
 
-Do not add renderer source files, copied project modules, or generated `__pycache__` folders to this skill. Keep code in the active project repository. Keep only lightweight references and example JSON assets in the skill when they help Codex work faster.
+The bundled `er/` package IS the renderer — keep it complete and up to date with the live project (this is intentional, not an accident). Hygiene rules that still apply:
+
+- Never commit `__pycache__`, `.DS_Store`, or generated outputs (`output.svg`, `output.png`, `*.pyc`) — delete them after test renders.
+- When the live project's modules change meaningfully, refresh the bundled copies in `er/` so the skill stays self-sufficient.
+- Keep lightweight references (`references/json-format.md`) and example JSONs in the skill.

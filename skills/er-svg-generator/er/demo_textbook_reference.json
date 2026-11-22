@@ -1,0 +1,73 @@
+{
+  "title": "学生课程简化 ER 图",
+  "entities": [
+    {
+      "id": "award",
+      "label": "奖惩",
+      "layout": { "x": 0, "y": 0 },
+      "attributes": []
+    },
+    {
+      "id": "student",
+      "label": "学生",
+      "layout": { "x": 360, "y": 0 },
+      "attributes": []
+    },
+    {
+      "id": "course",
+      "label": "课程",
+      "layout": { "x": 760, "y": 0 },
+      "attributes": []
+    },
+    {
+      "id": "class",
+      "label": "班级",
+      "layout": { "x": 360, "y": 240 },
+      "attributes": []
+    },
+    {
+      "id": "department",
+      "label": "院系",
+      "layout": { "x": 760, "y": 240 },
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "id": "award_student",
+      "label": "获得",
+      "layout": { "x": 180, "y": 0 },
+      "participants": [
+        { "entity": "award", "cardinality": "N", "side": "right" },
+        { "entity": "student", "cardinality": "1", "side": "left" }
+      ]
+    },
+    {
+      "id": "student_course",
+      "label": "选修",
+      "layout": { "x": 560, "y": 0 },
+      "participants": [
+        { "entity": "student", "cardinality": "N", "side": "right" },
+        { "entity": "course", "cardinality": "M", "side": "left" }
+      ]
+    },
+    {
+      "id": "student_class",
+      "label": "属于",
+      "layout": { "x": 360, "y": 120 },
+      "participants": [
+        { "entity": "student", "cardinality": "1", "side": "bottom" },
+        { "entity": "class", "cardinality": "N", "side": "top" }
+      ]
+    },
+    {
+      "id": "class_department",
+      "label": "属于",
+      "layout": { "x": 560, "y": 240 },
+      "participants": [
+        { "entity": "class", "cardinality": "N", "side": "right" },
+        { "entity": "department", "cardinality": "1", "side": "left" }
+      ]
+    }
+  ]
+}

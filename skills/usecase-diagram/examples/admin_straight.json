@@ -1,0 +1,71 @@
+{
+  "title": "系统管理员用例图",
+  "actors": [
+    {"id": "admin", "label": "系统管理员"}
+  ],
+  "usecases": [
+    {"id": "login", "label": "登录"},
+    {"id": "room_type", "label": "阅览室类型管理"},
+    {"id": "room", "label": "阅览室管理"},
+    {"id": "floor", "label": "楼层管理"},
+    {"id": "seat", "label": "座位管理"},
+    {"id": "student", "label": "学生管理"},
+    {"id": "manager", "label": "管理员管理"},
+    {"id": "log", "label": "日志管理"},
+    {"id": "settings", "label": "个人设置"},
+    {
+      "id": "room_type_ops",
+      "label": "新增、删除、修改和查询阅览室分类",
+      "width": 270
+    },
+    {
+      "id": "room_ops",
+      "label": "新增、删除、修改和查询阅览室",
+      "width": 250
+    },
+    {
+      "id": "floor_ops",
+      "label": "新增、删除、修改和查询楼层",
+      "width": 240
+    },
+    {"id": "seat_ops", "label": "开放和关闭座位", "width": 170},
+    {
+      "id": "student_ops",
+      "label": "新增、删除、修改和查询学生",
+      "width": 240
+    },
+    {
+      "id": "manager_ops",
+      "label": "新增、编辑和查询系统、普通管理员",
+      "width": 260
+    },
+    {"id": "rename", "label": "修改姓名", "width": 150},
+    {"id": "password", "label": "修改密码", "width": 150},
+    {"id": "contact", "label": "修改联系方式", "width": 170}
+  ],
+  "edges": [
+    {"source": "admin", "target": "login", "arrow": "open"},
+    {"source": "admin", "target": "room_type", "arrow": "open"},
+    {"source": "admin", "target": "room", "arrow": "open"},
+    {"source": "admin", "target": "floor", "arrow": "open"},
+    {"source": "admin", "target": "seat", "arrow": "open"},
+    {"source": "admin", "target": "student", "arrow": "open"},
+    {"source": "admin", "target": "manager", "arrow": "open"},
+    {"source": "admin", "target": "log", "arrow": "open"},
+    {"source": "admin", "target": "settings", "arrow": "open"},
+    {
+      "source": "room_type",
+      "target": "room_type_ops",
+      "type": "include",
+      "label": "<<包含>>"
+    },
+    {"source": "room", "target": "room_ops", "type": "include", "label": "<<包含>>"},
+    {"source": "floor", "target": "floor_ops", "type": "include", "label": "<<包含>>"},
+    {"source": "seat", "target": "seat_ops", "type": "include", "label": "<<包含>>"},
+    {"source": "student", "target": "student_ops", "type": "include", "label": "<<包含>>"},
+    {"source": "manager", "target": "manager_ops", "type": "include", "label": "<<包含>>"},
+    {"source": "settings", "target": "rename", "type": "include", "label": "<<包含>>"},
+    {"source": "settings", "target": "password", "type": "include", "label": "<<包含>>"},
+    {"source": "settings", "target": "contact", "type": "include", "label": "<<包含>>"}
+  ]
+}

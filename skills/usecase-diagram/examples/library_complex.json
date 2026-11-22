@@ -1,0 +1,42 @@
+{
+  "title": "图书管理系统用例图",
+  "layout": {
+    "mode": "complex"
+  },
+  "actors": [
+    {"id": "member", "label": "会员"},
+    {"id": "librarian", "label": "图书管理员"},
+    {"id": "admin", "label": "管理员"}
+  ],
+  "boundaries": [
+    {"id": "system", "label": "图书管理系统"}
+  ],
+  "usecases": [
+    {"id": "reserve", "label": "预约图书", "boundary": "system"},
+    {"id": "renew", "label": "续借图书", "boundary": "system"},
+    {"id": "search", "label": "信息查询", "boundary": "system"},
+    {"id": "login", "label": "登录", "boundary": "system"},
+    {"id": "borrow", "label": "借书", "boundary": "system"},
+    {"id": "return", "label": "还书", "boundary": "system"},
+    {"id": "member_info", "label": "设置信息管理", "boundary": "system"},
+    {"id": "book_info", "label": "图书信息管理", "boundary": "system"},
+    {"id": "protect", "label": "黑名单保护", "boundary": "system"},
+    {"id": "compensation", "label": "赔偿罚款", "boundary": "system"}
+  ],
+  "edges": [
+    {"source": "member", "target": "reserve"},
+    {"source": "member", "target": "renew"},
+    {"source": "member", "target": "search"},
+    {"source": "member", "target": "login"},
+    {"source": "librarian", "target": "search"},
+    {"source": "librarian", "target": "borrow"},
+    {"source": "librarian", "target": "return"},
+    {"source": "librarian", "target": "member_info"},
+    {"source": "librarian", "target": "book_info"},
+    {"source": "admin", "target": "login"},
+    {"source": "admin", "target": "protect"},
+    {"source": "borrow", "target": "search", "type": "include", "label": "<<包含>>"},
+    {"source": "return", "target": "search", "type": "include", "label": "<<包含>>"},
+    {"source": "return", "target": "compensation", "type": "extend", "label": "<<扩展>>"}
+  ]
+}

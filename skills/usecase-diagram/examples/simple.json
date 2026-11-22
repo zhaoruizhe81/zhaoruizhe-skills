@@ -1,0 +1,23 @@
+{
+  "title": "Repair order use cases",
+  "actors": [
+    {"id": "student", "label": "Student"}
+  ],
+  "usecases": [
+    {"id": "register", "label": "Register account"},
+    {"id": "login", "label": "Log in"},
+    {"id": "create_order", "label": "Submit repair order"},
+    {"id": "upload_photo", "label": "Upload site photo"},
+    {"id": "view_orders", "label": "View my orders"},
+    {"id": "feedback", "label": "Submit feedback"}
+  ],
+  "edges": [
+    {"source": "student", "target": "register"},
+    {"source": "student", "target": "login"},
+    {"source": "student", "target": "create_order"},
+    {"source": "student", "target": "upload_photo"},
+    {"source": "student", "target": "view_orders"},
+    {"source": "student", "target": "feedback"},
+    {"source": "create_order", "target": "upload_photo", "type": "include"}
+  ]
+}

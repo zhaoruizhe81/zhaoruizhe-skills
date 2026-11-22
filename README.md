@@ -65,6 +65,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | Skill | 说明 |
 |---|---|
 | [example-hello](skills/example-hello/) | 最小示例 skill，演示 SKILL.md 格式 |
+| [arxiv](skills/arxiv/) | arXiv 论文检索（关键词/作者/分类/ID） |
 | [cnki-citation](skills/cnki-citation/) | 检索中国知网(CNKI)文献并生成标准引文 |
 | [docx](skills/docx/) | Word 文档创建、编辑与分析（来自官方 documents 插件，转载请注明原许可） |
 | [er-svg-generator](skills/er-svg-generator/) | 陈氏 ER 图的生成、渲染与布局优化 |

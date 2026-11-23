@@ -1,0 +1,38 @@
+{
+  "name": "SalesDemo",
+  "out": "build/sales",
+  "table": "Sales",
+  "csv": "data/sales.csv",
+  "culture": "zh-CN",
+  "columns": [
+    {"name": "区域",   "type": "string", "summarize": "none"},
+    {"name": "产品",   "type": "string", "summarize": "none"},
+    {"name": "月份",   "type": "int64",  "format": "0",       "summarize": "none"},
+    {"name": "销售额", "type": "double", "format": "#,##0.0", "summarize": "sum"},
+    {"name": "数量",   "type": "int64",  "format": "#,##0",   "summarize": "sum"}
+  ],
+  "measures": [
+    {"name": "销售额合计", "dax": "SUM(Sales[销售额])", "format": "#,##0.0"},
+    {"name": "销量合计",   "dax": "SUM(Sales[数量])",   "format": "#,##0"},
+    {"name": "平均单价",   "dax": "DIVIDE(SUM(Sales[销售额]), SUM(Sales[数量]))", "format": "#,##0.0"},
+    {"name": "月度环比增长率",
+     "dax": "VAR m = MAX(Sales[月份])\n\t\t\tVAR cur = CALCULATE(SUM(Sales[销售额]), Sales[月份] = m)\n\t\t\tVAR prev = CALCULATE(SUM(Sales[销售额]), Sales[月份] = m - 1)\n\t\t\tRETURN DIVIDE(cur - prev, prev)",
+     "format": "0.0%"}
+  ],
+  "page": {"name": "p1", "display": "销售看板", "width": 1280, "height": 720},
+  "visuals": [
+    {"name": "c1", "type": "card", "x": 40,  "y": 12, "w": 200, "h": 105, "values": "Sales[销售额合计]"},
+    {"name": "c2", "type": "card", "x": 256, "y": 12, "w": 200, "h": 105, "values": "Sales[平均单价]"},
+    {"name": "c3", "type": "card", "x": 472, "y": 12, "w": 200, "h": 105, "values": "Sales[销量合计]"},
+    {"name": "v1", "type": "column_chart", "x": 40,  "y": 136, "w": 580, "h": 300,
+     "category": "Sales[月份]", "y_field": "Sales[销售额]", "series": "Sales[产品]"},
+    {"name": "v2", "type": "line_chart",   "x": 640, "y": 136, "w": 580, "h": 300,
+     "category": "Sales[月份]", "y_field": "Sales[销售额]", "series": "Sales[区域]"},
+    {"name": "v3", "type": "donut_chart",  "x": 40,  "y": 456, "w": 390, "h": 240,
+     "category": "Sales[区域]", "y_field": "Sales[销售额]"},
+    {"name": "v4", "type": "matrix",       "x": 450, "y": 456, "w": 390, "h": 240,
+     "rows": "Sales[区域]", "values": "Sales[销售额]"},
+    {"name": "v5", "type": "table",        "x": 860, "y": 456, "w": 380, "h": 240,
+     "values": ["Sales[产品]", "Sales[销售额]", "Sales[数量]"]}
+  ]
+}

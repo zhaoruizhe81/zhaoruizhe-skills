@@ -1,0 +1,33 @@
+{
+  "name": "FinanceDemo",
+  "out": "build/finance",
+  "table": "Fin",
+  "csv": "data/fin.csv",
+  "culture": "zh-CN",
+  "columns": [
+    {"name": "年份",     "type": "int64",  "format": "0",          "summarize": "none"},
+    {"name": "营业收入", "type": "double", "format": "#,##0.00",   "summarize": "sum"},
+    {"name": "净利润",   "type": "double", "format": "#,##0.00",   "summarize": "sum"},
+    {"name": "总资产",   "type": "double", "format": "#,##0.00",   "summarize": "sum"},
+    {"name": "净资产",   "type": "double", "format": "#,##0.00",   "summarize": "sum"},
+    {"name": "经营现金流", "type": "double", "format": "#,##0.00", "summarize": "sum"}
+  ],
+  "measures": [
+    {"name": "营业收入合计", "dax": "SUM(Fin[营业收入])", "format": "#,##0.00"},
+    {"name": "净利率", "dax": "DIVIDE(SUM(Fin[净利润]), SUM(Fin[营业收入]))", "format": "0.0%"},
+    {"name": "资产负债率", "dax": "DIVIDE(SUM(Fin[总资产]) - SUM(Fin[净资产]), SUM(Fin[总资产]))", "format": "0.0%"},
+    {"name": "营收增长率",
+     "dax": "VAR y = MAX(Fin[年份])\n\t\t\tVAR cur = CALCULATE(SUM(Fin[营业收入]), Fin[年份] = y)\n\t\t\tVAR prev = CALCULATE(SUM(Fin[营业收入]), Fin[年份] = y - 1)\n\t\t\tRETURN DIVIDE(cur - prev, prev)",
+     "format": "0.0%"}
+  ],
+  "page": {"name": "p1", "display": "经营概览", "width": 1280, "height": 720},
+  "visuals": [
+    {"name": "c1", "type": "card", "x": 40,  "y": 12, "w": 200, "h": 105, "values": "Fin[营业收入合计]"},
+    {"name": "c2", "type": "card", "x": 256, "y": 12, "w": 200, "h": 105, "values": "Fin[净利率]"},
+    {"name": "c3", "type": "card", "x": 472, "y": 12, "w": 200, "h": 105, "values": "Fin[资产负债率]"},
+    {"name": "v1", "type": "bar_chart",  "x": 40,  "y": 136, "w": 580, "h": 300,
+     "category": "Fin[年份]", "y_field": "Fin[营业收入]"},
+    {"name": "v2", "type": "line_chart", "x": 640, "y": 136, "w": 580, "h": 300,
+     "category": "Fin[年份]", "y_field": "Fin[营收增长率]"}
+  ]
+}

@@ -77,6 +77,7 @@ description: 一句话说清这个 skill 做什么、什么时候该用它（age
 | [magpie-browser](skills/magpie-browser/) | 操作用户本人的真实 Chrome（共享登录态与标签页），需浏览器侧 Magpie 扩展 |
 | [module-diagram](skills/module-diagram/) | 论文风格功能模块图 / WBS 树状图 |
 | [pe-dynamic](skills/pe-dynamic/) | Windows PE 动态逆向工作流（三线行为监控/Frida API探针/反反调试/trace找OEP脱壳，与 winpe-static 配对） |
+| [powerbi-pbip](skills/powerbi-pbip/) | 用 JSON spec 代码生成 Power BI 报表（PBIP：TMDL 语义模型 + PBIR 布局），打开即有图表、无需拖拽；含生成器、不变量校验器与两个实测示例 |
 | [ppt-master](skills/ppt-master/) | AI 驱动的可编辑 PPTX 生成工作流（含模板库，~120M） |
 | [qq-mail](skills/qq-mail/) | QQ 邮箱发信（支持中文附件名）/收发件查询 |
 | [redteam-ops](skills/redteam-ops/) | 红队渗透八段链路编排、隧道与突破选型、成果验收判据（技能正文源自 dsh-purge v1.1.40，MIT） |

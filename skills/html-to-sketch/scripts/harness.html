@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>h2s</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #ffffff; }
+  #fr { border: 0; display: block; }
+  #out { position: absolute; left: -99999px; top: 0; }
+</style>
+</head>
+<body>
+<iframe id="fr"></iframe>
+<pre id="out"></pre>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var url = q.get("url");
+  var mode = q.get("mode") || "text";
+  var W = parseInt(q.get("w"), 10) || 1440;
+  var H = parseInt(q.get("h"), 10) || 900;
+  var rootSel = q.get("root") || ".frame";
+
+  var fr = document.getElementById("fr");
+  fr.style.width = W + "px";
+  fr.style.height = H + "px";
+
+  function fail(msg) {
+    document.title = "h2s-fail: " + msg;
+  }
+
+  // Gradient-clipped text reports color:transparent. Recover the first opaque
+  // stop from background-image so the glyph is not exported as invisible.
+  function fixColor(el, cs) {
+    var color = cs.color;
+    if (!/rgba?\(\s*0,\s*0,\s*0,\s*0\s*\)|transparent/.test(color)) return color;
+    var clip = cs.webkitBackgroundClip || cs.backgroundClip;
+    if (clip !== "text") return color;
+    var all = (cs.backgroundImage || "").match(/rgba?\([^)]+\)/g) || [];
+    for (var i = 0; i < all.length; i++) {
+      var am = all[i].match(/rgba\([^)]*,\s*([\d.]+)\s*\)/);
+      if (!am || parseFloat(am[1]) > 0.5) return all[i];
+    }
+    return all.length ? all[0] : color;
+  }
+
+  // Kill every glyph so the screenshot keeps layout, borders and images only.
+  function hideText(d) {
+    var st = d.createElement("style");
+    st.textContent =
+      "*,*::before,*::after{color:transparent!important;" +
+      "-webkit-text-fill-color:transparent!important;text-shadow:none!important;}";
+    d.head.appendChild(st);
+    d.querySelectorAll("*").forEach(function (el) {
+      var cs = d.defaultView.getComputedStyle(el);
+      var clip = cs.webkitBackgroundClip || cs.backgroundClip;
+      if (clip !== "text") return;
+      el.style.setProperty("background-image", "none", "important");
+      el.style.setProperty("background", "none", "important");
+    });
+  }
+
+  function collect(d, base) {
+    var items = [];
+
+    function styleOf(el) {
+      var cs = d.defaultView.getComputedStyle(el);
+      return {
+        fs: parseFloat(cs.fontSize) || 16,
+        fw: cs.fontWeight,
+        ff: cs.fontFamily,
+        color: fixColor(el, cs),
+        ls: cs.letterSpacing,
+        lh: cs.lineHeight,
+        ta: cs.textAlign,
+        writing: cs.writingMode || "horizontal-tb",
+        opacity: cs.opacity
+      };
+    }
+
+    function pushTextNode(node) {
+      var raw = node.nodeValue;
+      if (!raw || !raw.trim()) return;
+      var el = node.parentElement;
+      if (!el) return;
+      var st = styleOf(el);
+      var vertical = /vertical/.test(st.writing || "");
+      var cls = (el.className && String(el.className)) || el.tagName.toLowerCase();
+
+      if (vertical) {
+        // Vertical CJK: one layer per glyph, exact rect from Range.
+        for (var i = 0; i < raw.length; i++) {
+          var ch = raw[i];
+          if (!ch.trim()) continue;
+          var r = d.createRange();
+          r.setStart(node, i);
+          r.setEnd(node, i + 1);
+          var qr = r.getBoundingClientRect();
+          if (qr.width < 0.5 || qr.height < 0.5) continue;
+          items.push({
+            t: ch,
+            x: qr.x - base.x, y: qr.y - base.y,
+            w: qr.width, h: qr.height,
+            fs: st.fs, fw: st.fw, ff: st.ff, color: st.color,
+            ls: st.ls, lh: st.lh, ta: st.ta,
+            writing: st.writing, cls: cls, vertical: true
+          });
+        }
+        return;
+      }
+
+      // Horizontal: whole text node as one layer; Range bbox spans all lines.
+      var rr = d.createRange();
+      rr.selectNodeContents(node);
+      var b = rr.getBoundingClientRect();
+      if (b.width < 0.5 || b.height < 0.5) return;
+      items.push({
+        t: raw.replace(/\s+/g, " ").trim(),
+        x: b.x - base.x, y: b.y - base.y,
+        w: b.width, h: b.height,
+        fs: st.fs, fw: st.fw, ff: st.ff, color: st.color,
+        ls: st.ls, lh: st.lh, ta: st.ta,
+        writing: st.writing, cls: cls, vertical: false
+      });
+    }
+
+    var walker = d.createTreeWalker(d.body, NodeFilter.SHOW_TEXT, null);
+    var n;
+    while ((n = walker.nextNode())) pushTextNode(n);
+    return items;
+  }
+
+  fr.onload = function () {
+    setTimeout(function () {
+      var d;
+      try { d = fr.contentDocument; } catch (e) { return fail("xdom"); }
+      if (!d || !d.body) return fail("nodoc");
+
+      if (mode === "shot") {
+        hideText(d);
+        document.title = "h2s-shot";
+        return;
+      }
+
+      var root = d.querySelector(rootSel) || d.body;
+      var base = root.getBoundingClientRect();
+      var items = collect(d, base);
+      document.getElementById("out").textContent =
+        "JSONMARK" + JSON.stringify({ texts: items }) + "JSONEND";
+      document.title = "h2s-ok " + items.length;
+    }, 1500);
+  };
+
+  fr.src = url;
+})();
+</script>
+</body>
+</html>
